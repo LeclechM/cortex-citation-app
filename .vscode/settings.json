@@ -3,5 +3,21 @@
   "eslint.useFlatConfig": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
+  },
+  // Tailwind CSS recommended settings
+  "tailwindCSS.experimental.classRegex": [
+    "tw`([^`]*)",
+    "tw\\(.*?['\"]([^)]+)['\"]\\)",
+    "class: ['\"]([^'\"]*)['\"]",
+    "className: ['\"]([^'\"]*)['\"]",
+    ":class=['\"]([^'\"]*)['\"]"
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.includeLanguages": {
+    "vue": "html",
+    "typescript": "javascript",
+    "javascript": "javascript"
   }
 }

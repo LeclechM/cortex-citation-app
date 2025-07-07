@@ -10,11 +10,20 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'shadcn-nuxt',
     '@nuxtjs/color-mode',
+    '@nuxtjs/supabase',
+    '@nuxtjs/turnstile',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/tailwind.css'],
   colorMode: {
     classSuffix: '',
+  },
+  runtimeConfig: {
+    turnstile: {
+      // This can be overridden at runtime via the NUXT_TURNSTILE_SECRET_KEY
+      // environment variable.
+      secretKey: '',
+    },
   },
   compatibilityDate: '2025-05-15',
   vite: {
@@ -30,6 +39,12 @@ export default defineNuxtConfig({
       standalone: false,
       stylistic: true,
     },
+  },
+  shadcn: {
+    componentDir: '~/components/ui',
+  },
+  turnstile: {
+    siteKey: '0x4AAAAAABjlV1KpqF8ABtGR',
   },
 
 })
