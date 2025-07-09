@@ -1,28 +1,39 @@
 <script lang="ts" setup>
-import type { Database } from '~/types/database.types'
 import { toast } from 'vue-sonner'
 import CitationList from '@/components/CitationList.vue'
 import { Button } from '@/components/ui/button'
 
-const client = useSupabaseClient<Database>()
+const client = useSupabaseClient()
 
 export interface TCitation {
   id: string
   content: string
   from_whom?: string
   created_at: string
+  from_when?: string
   profiles?: {
     id: string
   }
 }
-const { data: citations } = await useAsyncData<TCitation[]>('citations', async () => {
-  const { data, error } = await client.from('citations').select('id,content,from_whom,created_at, profiles(id)').order('created_at', { ascending: false })
+const { data: citations, refresh } = await useAsyncData<TCitation[]>('citations', async () => {
+  const { data, error } = await client.from('citations').select('id,content,from_whom,from_when,created_at,profiles(id)').order('created_at', { ascending: false })
   if (error) {
     toast.error(`Erreur lors de la récupération des citations: ${error.message}`)
     return []
   }
   return data
 })
+
+async function deleteCitation(id: string) {
+  const { error } = await client.from('citations').delete().eq('id', id)
+  if (error) {
+    toast.error(`Erreur lors de la suppression de la citation: ${error.message}`)
+  }
+  else {
+    toast.success('Citation supprimée avec succès!')
+    refresh() // Re-fetch citations after deletion
+  }
+}
 </script>
 
 <template>
@@ -44,7 +55,7 @@ const { data: citations } = await useAsyncData<TCitation[]>('citations', async (
       </NuxtLink>
     </div>
 
-    <CitationList v-if="citations && citations.length > 0" :citations="citations" />
+    <CitationList v-if="citations && citations.length > 0" :citations="citations" @delete="deleteCitation" />
     <div v-else class="text-center text-muted-foreground mt-12">
       <p>Aucune citation enregistrée pour le moment.</p>
     </div>

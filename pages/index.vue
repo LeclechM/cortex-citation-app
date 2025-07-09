@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { Button } from '@/components/ui/button'
 </script>
 
 <template>
@@ -11,9 +10,9 @@ import { Button } from '@/components/ui/button'
       Découvrez et explorez des citations inspirantes pour illuminer votre journée !
     </p>
     <NuxtLink to="/citations">
-      <Button>
+      <UiButton>
         Voir les citations
-      </Button>
+      </Uibutton>
     </NuxtLink>
 
     <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="Imagination et IT" class="mt-12 rounded-2xl shadow-2xl w-full max-w-2xl object-cover">

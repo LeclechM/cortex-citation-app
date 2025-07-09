@@ -1,12 +1,16 @@
 <script setup lang="ts">
+import { NuxtLink } from '#components'
+
 const text = 'CortexCitations'
 const textArray = ref(text.split(''))
 </script>
 
 <template>
-  <span class="ml-2 text-3xl font-bold text-primary handwriting-animation">
-    <span v-for="(char, i) in textArray" :key="i" :style="{ 'animation-delay': `${i * 0.08}s` }" class="handwriting-char">{{ char }}</span>
-  </span>
+  <NuxtLink to="/">
+    <span class="ml-2 text-3xl font-bold text-primary handwriting-animation">
+      <span v-for="(char, i) in textArray" :key="i" :style="{ 'animation-delay': `${i * 0.08}s` }" class="handwriting-char">{{ char }}</span>
+    </span>
+  </NuxtLink>
 </template>
 
 <style scoped>

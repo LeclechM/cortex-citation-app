@@ -43,6 +43,15 @@ export default defineNuxtConfig({
   shadcn: {
     componentDir: '~/components/ui',
   },
+  supabase: {
+    redirectOptions: {
+      login: '/signin',
+      callback: '/confirm',
+      include: undefined,
+      exclude: ['/signup'],
+      saveRedirectToCookie: false,
+    },
+  },
   turnstile: {
     siteKey: '0x4AAAAAABjlV1KpqF8ABtGR',
   },

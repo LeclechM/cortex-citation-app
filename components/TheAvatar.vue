@@ -1,16 +1,4 @@
 <script lang="ts" setup>
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-
-import { Skeleton } from '@/components/ui/skeleton'
-
 const user = useSupabaseUser()
 
 const avatarUrl = computed(() => {
@@ -30,33 +18,43 @@ async function signOut() {
   if (error) {
     console.error('Error signing out:', error)
   }
-  navigateTo('/login')
+  navigateTo('/signin')
 }
+
+const userFullName = computed(() => {
+  const firstName = user.value?.user_metadata?.first_name || ''
+  const lastName = user.value?.user_metadata?.last_name || ''
+  return `${firstName} ${lastName}`.trim()
+})
 </script>
 
 <template>
-  <DropdownMenu>
-    <DropdownMenuTrigger as-child>
-      <Avatar>
-        <AvatarImage
+  <UiDropdownMenu v-if="user">
+    <UiDropdownMenuTrigger as-child>
+      <UiAvatar>
+        <UiAvatarImage
           :src="avatarUrl"
           alt="User avatar"
           class="h-8 w-8 rounded-full object-cover"
         />
-        <AvatarFallback>
-          <Skeleton class="h-8 w-8 rounded-full" />
-        </AvatarFallback>
-      </Avatar>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent class="w-56">
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        Profile
-      </DropdownMenuItem>
-      <DropdownMenuItem @click="signOut">
+        <UiAvatarFallback>
+          <UiSkeleton class="h-8 w-8 rounded-full" />
+        </UiAvatarFallback>
+      </UiAvatar>
+    </UiDropdownMenuTrigger>
+    <UiDropdownMenuContent class="w-56">
+      <UiDropdownMenuLabel>{{ userFullName ?? 'Mon compte' }}</UiDropdownMenuLabel>
+      <UiDropdownMenuSeparator />
+      <UiDropdownMenuItem>
+        <NuxtLink to="/account/profile" class="flex items-center gap-2">
+          <Icon name="radix-icons:person" class="h-4 w-4" />
+          Mon profil
+        </NuxtLink>
+      </UiDropdownMenuItem>
+      <UiDropdownMenuItem @click="signOut">
+        <Icon name="radix-icons:exit" class="h-4 w-4" />
         Se déconnecter
-      </DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
+      </UiDropdownMenuItem>
+    </UiDropdownMenuContent>
+  </UiDropdownMenu>
 </template>
