@@ -13,13 +13,13 @@
     "lint:check": "eslint ."
   },
   "dependencies": {
-    "@antfu/eslint-config": "^4.16.2",
+    "@antfu/eslint-config": "^4.17.0",
     "@internationalized/date": "^3.8.2",
     "@nuxt/eslint": "1.5.2",
     "@nuxt/fonts": "0.11.4",
     "@nuxt/icon": "1.15.0",
     "@nuxt/image": "1.10.0",
-    "@nuxt/scripts": "^0.11.9",
+    "@nuxt/scripts": "^0.11.10",
     "@nuxtjs/supabase": "1.5.3",
     "@nuxtjs/turnstile": "1.0.0",
     "@tailwindcss/vite": "^4.1.11",
@@ -27,7 +27,7 @@
     "@vueuse/core": "^13.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "eslint": "^9.30.1",
+    "eslint": "^9.31.0",
     "nuxt": "^4.0.0",
     "reka-ui": "^2.3.2",
     "shadcn-nuxt": "2.2.0",
@@ -37,8 +37,8 @@
     "vee-validate": "^4.15.1",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1",
-    "vue-sonner": "^2.0.1",
-    "zod": "^3.25.76"
+    "vue-sonner": "^2.0.2",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@iconify-json/radix-icons": "^1.2.2",
